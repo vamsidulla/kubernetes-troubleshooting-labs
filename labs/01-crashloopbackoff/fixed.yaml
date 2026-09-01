@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-checker-settings
+data:
+  APP_MODE: learning
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-checker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-checker
+  template:
+    metadata:
+      labels:
+        app: config-checker
+    spec:
+      containers:
+        - name: config-checker
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting in ${APP_MODE} mode"
+              while true; do sleep 30; done
+          envFrom:
+            - configMapRef:
+                name: config-checker-settings
