@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-checker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-checker
+  template:
+    metadata:
+      labels:
+        app: config-checker
+    spec:
+      containers:
+        - name: config-checker
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting application"
+              if [ -z "${APP_MODE}" ]; then
+                echo "ERROR: APP_MODE is required"
+                exit 1
+              fi
+              while true; do sleep 30; done
