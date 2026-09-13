@@ -19,6 +19,10 @@ Production Kubernetes work is less about memorizing commands and more about conn
 | [01](labs/01-crashloopbackoff/) | Container repeatedly restarts because required configuration is missing | Pod status, events, logs, exit codes, ConfigMaps |
 | [02](labs/02-readiness-probe/) | Application runs but never becomes Ready because the probe targets the wrong port | Probes, endpoints, Services, in-pod testing |
 | [03](labs/03-competing-consumers/) | Queue events appear intermittent because two service instances compete for messages | Messaging semantics, replica discovery, hypothesis-driven troubleshooting |
+| [04](labs/04-imagepullbackoff/) | ImagePullBackOff from an invalid tag | Investigation, correction, verification |
+| [05](labs/05-service-selector/) | Service has no ready endpoints | Investigation, correction, verification |
+| [06](labs/06-configmap-key/) | CreateContainerConfigError from a missing key | Investigation, correction, verification |
+| [07](labs/07-node-selector/) | Pending Pod from unmatched node selection | Investigation, correction, verification |
 
 ## Prerequisites
 
@@ -64,8 +68,8 @@ All examples use an isolated namespace and intentionally broken resources. Run t
 
 ## Roadmap
 
-- ImagePullBackOff and registry authentication
-- Service selector and endpoint failures
+- Private registry authentication (invalid-tag scenario is covered in Lab 04)
+- Service targetPort mismatch (selector failures are covered in Lab 05)
 - DNS and NetworkPolicy troubleshooting
 - PVC scheduling and mount failures
 - CPU/memory requests, limits, and OOMKilled
