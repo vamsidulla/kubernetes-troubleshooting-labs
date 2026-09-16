@@ -12,6 +12,10 @@ Production Kubernetes work is less about memorizing commands and more about conn
 - Root-cause explanation
 - Corrective and preventive actions
 
+## AKS troubleshooting atlas
+
+The [AKS Troubleshooting Atlas](aks-troubleshooting/) adds 30 Azure-specific runbooks across beginner, intermediate, and advanced levels. It covers access, identity, networking, DNS, storage, node health, autoscaling, upgrades, private clusters, large-cluster control-plane pressure, and Istio. Each runbook starts with evidence, groups common causes, gives a resolution path, defines verification, and links to primary documentation.
+
 ## Labs
 
 | Lab | Scenario | Skills demonstrated |

@@ -1,0 +1,52 @@
+# Source register
+
+Primary sources reviewed on 2026-09-16. Microsoft and Kubernetes update these pages; recheck them before performing production changes.
+
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/connection-issues-application-hosted-aks-cluster
+- https://learn.microsoft.com/en-us/azure/aks/access-private-cluster
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/user-cannot-get-cluster-resources
+- https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/cannot-pull-image-from-acr-to-aks-cluster
+- https://kubernetes.io/docs/concepts/containers/images/
+- https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/
+- https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+- https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/availability-performance/node-not-ready-basic-troubleshooting
+- https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/dns/basic-troubleshooting-dns-resolution-problems
+- https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/storage/fail-to-mount-azure-disk-volume
+- https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+- https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container
+- https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration
+- https://learn.microsoft.com/en-us/azure/aks/load-balancer-standard
+- https://kubernetes.io/docs/concepts/services-networking/ingress/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/custom-nsg-blocks-traffic
+- https://kubernetes.io/docs/concepts/services-networking/network-policies/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/basic-troubleshooting-outbound-connections
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/errors-arfter-restricting-egress-traffic
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/insufficientsubnetsize-error-advanced-networking
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/error-code-subnetisfull-upgrade
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/availability-performance/node-not-ready-after-being-healthy
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/availability-performance/identify-memory-saturation-aks
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/availability-performance/identify-high-cpu-consuming-containers-aks
+- https://learn.microsoft.com/en-us/azure/aks/cluster-autoscaler-overview
+- https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+- https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
+- https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/snat-port-exhaustion
+- https://learn.microsoft.com/en-us/azure/aks/nat-gateway
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/intermittent-timeouts-or-server-issue
+- https://learn.microsoft.com/en-us/azure/aks/private-clusters
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/connectivity/tunnel-connectivity-issues
+- https://learn.microsoft.com/en-us/azure/aks/azure-csi-disk-storage-provision
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/storage/fail-to-mount-azure-file-share
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/storage/mountoptions-settings-azure-files
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/error-codes/linkedauthorizationfailed-error
+- https://learn.microsoft.com/en-us/azure/aks/use-managed-identity
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/error-code-aksrequeststhrottled
+- https://learn.microsoft.com/en-us/azure/quotas/view-quotas
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/troubleshoot-apiserver-etcd
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/aks-at-scale-troubleshoot-guide
+- https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/extensions/istio-add-on-ingress-gateway
+- https://learn.microsoft.com/en-us/azure/aks/istio-about
