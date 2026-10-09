@@ -16,6 +16,19 @@ Production Kubernetes work is less about memorizing commands and more about conn
 
 The [AKS Troubleshooting Atlas](aks-troubleshooting/) adds 30 Azure-specific runbooks across beginner, intermediate, and advanced levels. It covers access, identity, networking, DNS, storage, node health, autoscaling, upgrades, private clusters, large-cluster control-plane pressure, and Istio. Each runbook starts with evidence, groups common causes, gives a resolution path, defines verification, and links to primary documentation.
 
+## Current coverage
+
+The repository has two complementary formats: **7 runnable exercises** in `labs/` and **30 completed diagnostic runbooks** in the [atlas coverage matrix](aks-troubleshooting/COVERAGE.md). A completed runbook does not imply that a standalone broken/fixed lab exists.
+
+| Area previously listed on the roadmap | Completed coverage | Standalone exercise status |
+|---|---|---|
+| Private registry authentication | [B03: image pulls](aks-troubleshooting/beginner/b03-image-pull.md), [I01: ACR identity, secrets, and network access](aks-troubleshooting/intermediate/i01-acr-auth-network.md) | Lab 04 covers invalid tags; authentication exercise remains to be built |
+| Service targetPort mismatch | [B07: selectors, readiness, targetPort, and protocol](aks-troubleshooting/beginner/b07-service-endpoints.md) | Lab 05 covers selectors; targetPort exercise remains to be built |
+| DNS and NetworkPolicy | [B08: DNS resolution](aks-troubleshooting/beginner/b08-dns-resolution.md), [I04: NetworkPolicy/NSG](aks-troubleshooting/intermediate/i04-networkpolicy-nsg.md) | Standalone exercises remain to be built |
+| PVC scheduling and mount failures | [B09: PVC Pending](aks-troubleshooting/beginner/b09-pvc-pending.md), [A05: Azure Disk topology](aks-troubleshooting/advanced/a05-azure-disk-topology.md), [A06: Azure Files mounts](aks-troubleshooting/advanced/a06-azure-files.md) | Standalone exercises remain to be built |
+| Requests, limits, OOMKilled, and node pressure | [B06: scheduling](aks-troubleshooting/beginner/b06-pod-pending.md), [I07: node pressure](aks-troubleshooting/intermediate/i07-node-notready-pressure.md), [I08: OOM, throttling, eviction](aks-troubleshooting/intermediate/i08-resource-saturation.md) | Lab 07 covers node selectors; resource-pressure exercises remain to be built |
+| Ingress and Gateway API routing | [I03: Ingress/TLS](aks-troubleshooting/intermediate/i03-ingress-routing-tls.md), [A10: managed Istio ingress](aks-troubleshooting/advanced/a10-istio-ingress.md) | Ingress is documented; A10 mentions Gateway API inspection, but dedicated Gateway API conditions/reference troubleshooting and runnable exercises remain gaps |
+
 ## Labs
 
 | Lab | Scenario | Skills demonstrated |
@@ -72,12 +85,23 @@ All examples use an isolated namespace and intentionally broken resources. Run t
 
 ## Roadmap
 
-- Private registry authentication (invalid-tag scenario is covered in Lab 04)
-- Service targetPort mismatch (selector failures are covered in Lab 05)
-- DNS and NetworkPolicy troubleshooting
-- PVC scheduling and mount failures
-- CPU/memory requests, limits, and OOMKilled
-- Ingress and Gateway API routing
+The topics in **Current coverage** are delivered as runbooks. Remaining work is to turn documented scenarios into repeatable exercises and add a dedicated Gateway API diagnostic path.
+
+### Next lab 08: DNS egress blocked by NetworkPolicy (proposed)
+
+- **Scope:** In an isolated namespace, apply default-deny egress to a diagnostic client while keeping an explicitly allowed backend reachable by IP. Omit the DNS allowance so Service-name lookups fail. Inspect policy selectors and pod resolver settings, then add narrowly scoped UDP/TCP 53 access to the cluster's actual DNS endpoint. Keep unrelated egress denied. This exercises the existing B08/I04 guidance rather than adding a new incident family.
+- **Prerequisites:** A disposable cluster with a CNI that enforces NetworkPolicy, `kubectl`, and a client image with DNS and HTTP tools. Identify CoreDNS labels/namespace and whether NodeLocal DNSCache changes the resolver path; adapt the DNS allowance to that cluster. Verify enforcement with a denied control request before starting.
+- **Validation:** Before the fix, the allowed backend succeeds by IP but fails by Service name, and an unrelated destination remains blocked. After the fix, UDP and TCP DNS queries and the same Service-name HTTP request succeed; the unrelated destination remains blocked. Capture policy/resolver evidence and results before and after, then remove the lab namespace.
+
+### Next lab 09: Gateway API cross-namespace backend reference (proposed)
+
+- **Scope:** Create a Gateway and HTTPRoute in a frontend namespace and a healthy Service in a backend namespace. Use a cross-namespace backendRef without a ReferenceGrant. Diagnose the route's `ResolvedRefs=False` condition and its reason, then add a ReferenceGrant in the backend namespace limited to that frontend namespace, HTTPRoute kind, and named Service. Keep route attachment valid so this isolates reference authorization from listener or targetPort failures. Add a companion Gateway API runbook linking I03/A10.
+- **Prerequisites:** A disposable cluster with compatible Gateway API CRDs, a running Gateway API controller that supports HTTPRoute and cross-namespace Service references, an accepted GatewayClass, and a reachable Gateway listener (local forwarding is sufficient). Confirm the backend responds directly and the route's parent/listener permits attachment before injecting the reference failure.
+- **Validation:** Before the fix, the backend is healthy but the route reports `ResolvedRefs=False` with a reference-denial reason and the Gateway request cannot reach it. After the scoped grant, the route reports `Accepted=True` and `ResolvedRefs=True` for the intended controller/parent at the current generation, the Gateway is `Programmed=True`, and a request with the configured Host/path returns the backend's expected response. Remove the grant to reproduce denial, then clean up both namespaces and any lab-owned cluster-scoped resources.
+
+Each proposed exercise should include `broken.yaml`, investigation instructions with expected evidence, a documented fix/solution, validation commands, and cleanup instructions. These proposals are not implemented labs.
+
+After these two labs, add standalone registry-authentication, targetPort, PVC, resource-pressure, and Ingress exercises using the existing runbooks as the diagnostic references.
 
 ## Author
 
